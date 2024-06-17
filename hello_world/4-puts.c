@@ -1,4 +1,4 @@
-#include<stdio.h>
+y#include<stdio.h>
 /**
  * main - Entry point
  * Description: 'prints one sentence, followed by a new line.'
