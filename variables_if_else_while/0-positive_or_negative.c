@@ -1,11 +1,15 @@
+#include <stdlib.h>
+#include <time.h>
 #include <stdio.h>
 
+/* betty style doc for function main goes there */
 int main(void)
 {
-      int n;
+	int n;
 
-      printf("%d \n", n);
-
+	srand(time(0));
+	n = rand() - RAND_MAX / 2;
+printf("%d\n", n);
 if (n > 0)
 {
 printf("The number is positive \n");
@@ -18,5 +22,5 @@ else
 {
 printf("The number is zero \n");
 }
-return 0;
+ return 0;
 }
