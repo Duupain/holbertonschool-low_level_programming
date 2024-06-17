@@ -20,7 +20,7 @@ else if (n < 0)
 }
  else if (n == 0)
 {
-  Printf ("%d is zero \n",n);
+  printf ("%d is zero \n",n);
 }
  return 0;
 }
