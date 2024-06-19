@@ -9,13 +9,13 @@ int main(void)
 char number;
 for (number = 48; number <= 57 ; number++)
 {
-if (number != 9)
+putchar(number);  
+if (number != 57)
 {
-/*print the value of the variable*/
-putchar(number);
 putchar(',');
 putchar(' ');
 }
+/*print the value of the variable*/
 }
 putchar('\n');
 
