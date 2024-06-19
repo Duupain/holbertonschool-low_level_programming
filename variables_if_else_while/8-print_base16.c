@@ -6,14 +6,15 @@
 int main(void)
 {
 char number;
+char hexadecimal;
+
 for (number = 48; number <= 57; number++)
 {
 /*print the value of the variable*/
 putchar(number);
 }
 /*declare a variable*/
-char hexadecimal;
- for (hexadecimal = 97; hexadecimal <= 102; hexadecimal++)
+for (hexadecimal = 97; hexadecimal <= 102; hexadecimal++)
 {
 
 /*print the value of the variable*/
