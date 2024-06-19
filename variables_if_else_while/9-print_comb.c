@@ -9,7 +9,7 @@ int main(void)
 char number;
 for (number = 48; number <= 57 ; number++)
 {
-putchar(number);  
+putchar(number);
 if (number != 57)
 {
 putchar(',');
