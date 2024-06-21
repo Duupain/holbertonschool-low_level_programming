@@ -14,7 +14,7 @@ _putchar(result + '0');
 }
 else if (x < 0)
 {
-result = (-x % 10);
+result = ((x % 10) * -1);
 _putchar(result + '0');
 }
 return (result);
