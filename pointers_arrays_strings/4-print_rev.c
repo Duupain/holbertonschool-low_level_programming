@@ -1,0 +1,19 @@
+#include "main.h"
+/**
+*print_rev - prints a string, followed by a new line
+*@s: string
+*/
+void print_rev(char *s)
+{
+int e = 0;
+while (s[e])
+{
+e++;
+}
+while (e > -1)
+{
+_putchar(s[e]);
+e--;
+}
+_putchar('\n');
+}
