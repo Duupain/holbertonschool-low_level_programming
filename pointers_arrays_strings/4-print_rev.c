@@ -10,6 +10,7 @@ while (s[e])
 {
 e++;
 }
+e--;
 while (e > -1)
 {
 _putchar(s[e]);
