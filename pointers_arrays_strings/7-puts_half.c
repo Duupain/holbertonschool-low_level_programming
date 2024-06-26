@@ -12,13 +12,13 @@ while (str[start] != 0)
 start++;
 length++;
 }
-start = length / 2;
-while (start < length)
-{
 if (start % 2 == 1)
 {
 length = length + 1;
 }
+start = length / 2;
+while (start < length)
+{
 _putchar(str[start]);
 start++;
 }
