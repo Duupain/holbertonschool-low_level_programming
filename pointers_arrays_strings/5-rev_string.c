@@ -13,7 +13,7 @@ start++;
 length++;
 }
 length--;
- for (start = 0; start < (length + 1) / 2; start++)
+for (start = 0; start < (length + 1) / 2; start++)
 {
 temp = s[start];
 s[start] = s[length - start];
