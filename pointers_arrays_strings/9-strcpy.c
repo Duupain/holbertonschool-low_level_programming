@@ -6,13 +6,14 @@
 *@src: pointeur de type chaine de character
 *Return: dest
 */
-char *_strcpy(char *dest, const char *src)
+char *_strcpy(char *dest, char *src)
 {
-int index = 0;
-while (src[index])
+int i = 0;
+while (*src)
 {
-dest[index] = src[index];
-index++;
+dest[i++] = *src;
+src++;
 }
+dest[i++] = '\0';
 return (dest);
 }
