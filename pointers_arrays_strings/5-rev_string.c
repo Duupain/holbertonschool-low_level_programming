@@ -1,21 +1,22 @@
 #include "main.h"
 /**
-*
-*
+*rev_string - reverse string
+*@s: string
 */
 void rev_string(char *s)
 {
-  int e = 0, i = 0, j = 0,temp;
-while (s[e])
+int start = 0, length = 0;
+char temp;
+while (s[start] != '\0')
 {
-e++;
+start++;
+length++;
 }
-while ( i < j)   
-{    
-temp = s[0];  
-s[0] = s[8];  
-s[8] = temp;  
-i++; 
-j--;
-}  
+length--;
+for (start = 0; start < length / 2; start++)
+{
+temp = s[start];
+s[start] = s[length - start];
+s[length - start] = temp;
+}
 }
