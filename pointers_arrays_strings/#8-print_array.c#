@@ -1,9 +1,8 @@
 #include "main.h"
 #include <stdio.h>
 /**
-*print_array - print element of the array
-*@a: debut
-*@n: fin
+*print_array - print element of an array
+*@a: 
 */
 void print_array(int *a, int n)
 {
