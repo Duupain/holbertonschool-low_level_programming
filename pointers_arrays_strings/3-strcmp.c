@@ -19,18 +19,18 @@ l++;
 }
 i = 0;
 l = 0;
-while (s1[i] != '\0' && s2[i] != '\0')
-{
-if (s1[i] != s2[l])
-{
-return (s1[i] - s2[l]);
-}
-if (s1[i] == s2[l])
-{
-return (0);
-}
-i++;
-l++;
-}
+ while (s1[i] - s2[l] != 0)
+   {
+     if (s1[i] != s2[l])
+       {
+	 return (s1[i] - s2[l]);
+       }
+     if (s1[i] == s2[l])
+       {
+	 return (0);
+       }
+     i++;
+     l++;
+   }
 return (0);
 }
