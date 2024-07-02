@@ -17,5 +17,9 @@ return (&s[i]);
 }
 i++;
 }
+if (c == '\0')
+{
+return (&s[i]);
+}
 return (NULL);
 }
