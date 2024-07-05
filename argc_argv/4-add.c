@@ -24,6 +24,10 @@ printf("Error\n");
 return (1);
 }
 }
+/**
+*transformer une chaine de caracteres,
+*representant une valeur entiere, en une valeur numerique
+*/
 result += atoi(argv[i]);
 }
 printf("%d\n", result);
