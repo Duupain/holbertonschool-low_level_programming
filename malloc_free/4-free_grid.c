@@ -3,13 +3,21 @@
 #include <stdlib.h>
 
 /**
- * alloc_grid - Alloue un tableau 2D d'entiers initialisés à 0.
- * @width: Largeur du tableau.
- * @height: Hauteur du tableau.
- *
- * Return: Un pointeur vers le tableau 2D alloué et initialisé à 0,
- *         ou NULL en cas d'échec d'allocation.
+ * free_grid - Libère la mémoire allouée pour un tableau 2D d'entiers.
+ * @grid: Pointeur vers le tableau 2D d'entiers à libérer.
+ * @height: Nombre de lignes dans le tableau 2D.
  */
 void free_grid(int **grid, int height)
 {
+	int i;
+
+	if (grid == NULL)
+	{
+		return;
+	}
+	for (i = 0; i < height; i++)
+	{
+		free(grid[i]);
+	}
+	free(grid);
 }
