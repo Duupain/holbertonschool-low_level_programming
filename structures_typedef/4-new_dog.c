@@ -30,6 +30,7 @@ dog_t *new_dog(char *name, float age, char *owner)
 	}
 	return (w);
 }
+
 /**
  *_strdup - returns a pointer to a newly allocated space in memory,
  *which contains a copy of the string given as a parameter.
