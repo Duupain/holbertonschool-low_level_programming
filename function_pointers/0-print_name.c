@@ -1,6 +1,5 @@
-#include <stdio.h>
 #include "function_pointers.h"
-
+#include <stdio.h>
 /**
  * print_name - Imprime un nom en utilisant une fonction donnée.
  * @name: Le nom à imprimer.
