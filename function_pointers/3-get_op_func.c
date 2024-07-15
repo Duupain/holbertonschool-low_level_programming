@@ -25,8 +25,13 @@ int (*get_op_func(char *s))(int, int)
 
   while (s != ops)
   {
+    /**Boucle pour parcourir le tableau ops
+     * jusqu'à trouver une correspondance ou atteindre la fin
+     * Vérifie également que l'opérateur est un seul caractère
+     */
     if (*(ops[i].op) == *s && s[1] == '\0')
     {
+      /*Retourne le pointeur vers la fonction associée à l'opérateur*/
       return (ops[i].f);
     }
     i++;
