@@ -8,5 +8,8 @@
  */
 void print_name(char *name, void (*f)(char *))
 {
-	f(name); /*Appelle la fonction pointée par 'f' avec 'name' comme argument*/
+	if (name != NULL && f != NULL)
+	{
+		f(name); /*Appelle la fonction pointée par 'f' avec 'name' comme argument*/
+	}
 }
