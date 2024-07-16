@@ -25,7 +25,9 @@ int main(int argc, char *argv[])
 
 	/* Obtient le pointeur vers la fonction pour l'opérateur donné */
 	operation = get_op_func(argv[2]);
-	if (operation == NULL || argv[2][1] != '\0') /*verifie si l'operateur est valide*/
+
+	/*verifie si l'operateur est valide*/
+	if (operation == NULL || argv[2][1] != '\0')
 	{
 		printf("Error\n");
 		return (99);
