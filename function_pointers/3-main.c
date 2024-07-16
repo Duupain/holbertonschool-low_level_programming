@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
 	if (argc != 4)
 	{
 		printf("Error\n");
-		return (98);
+		exit(98);
 	}
 
 	/*Convertit les arguments en entiers*/
@@ -30,14 +30,14 @@ int main(int argc, char *argv[])
 	if (operation == NULL || argv[2][1] != '\0')
 	{
 		printf("Error\n");
-		return (99);
+		exit(99);
 	}
 
 	/*pour les division et modulo si le nombre 2(b) est egal a 0 return error */
 	if ((*argv[2] == '/' || *argv[2] == '%') && b == 0)
 	{
 		printf("Error\n");
-		return (100);
+		exit(100);
 	}
 
 	/*faire l'operation de a + b et print le resultat*/
