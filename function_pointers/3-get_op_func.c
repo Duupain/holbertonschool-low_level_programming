@@ -1,6 +1,5 @@
 #include "3-calc.h"
 #include <stddef.h>
-#include <stdio.h>
 
 /**
  * get_op_func - Selects the correct function to perform
@@ -31,7 +30,6 @@ int (*get_op_func(char *s))(int, int)
 	 */
 	while (ops[i].op != NULL)
 	{
-		printf("%c,%c\n", *(ops[i].op), *s);
 		if (*(ops[i].op) == *s && s[1] == '\0')
 		{
 			/*Retourne le pointeur vers la fonction associée à l'opérateur*/
