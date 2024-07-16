@@ -13,12 +13,13 @@ int sum_them_all(const unsigned int n, ...)
 	int sum = 0;
 	unsigned int i;
 
-	/*Initialisation de la liste de paramètres variadiques*/
-	va_start(args, n);
 	if (n == 0)
 	{
 		return (0);
 	}
+	/*Initialisation de la liste de paramètres variadiques*/
+	va_start(args, n);
+
 	/*Parcourir tous les paramètres variadiques*/
 	for (i = 0; i < n; i++)
 	{
