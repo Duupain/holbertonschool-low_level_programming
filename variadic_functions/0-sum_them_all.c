@@ -8,7 +8,8 @@
 int sum_them_all(const unsigned int n, ...)
 {
 	/*Variable pour stocker la somme*/
-	int sum = 0, i;
+	int sum = 0;
+	unsigned int i;
 
 	/*Déclaration de la liste de paramètres variadiques*/
 	va_list args;
@@ -21,7 +22,7 @@ int sum_them_all(const unsigned int n, ...)
 	va_start(args, n);
 
 	/*Parcourir tous les paramètres variadiques*/
-	for (i = 0; i < (int)n; i++)
+	for (i = 0; i < n; i++)
 	{
 		/*Ajouter chaque paramètre à la somme*/
 		sum += va_arg(args, int);
