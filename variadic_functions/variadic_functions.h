@@ -10,8 +10,8 @@
  */
 typedef struct spec
 {
-  char *c;
-  void (*f)(va_list args);
+	char *c;
+	void (*f)(va_list args);
 } tableau;
 
 int sum_them_all(const unsigned int n, ...);
