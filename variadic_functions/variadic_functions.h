@@ -3,6 +3,11 @@
 
 #include <stdarg.h>
 
+/**
+ * struct spec - la structure pour print un arguments
+ * @c: Type d'arguments
+ * @f: la fonction pour print un arguments
+ */
 typedef struct spec
 {
   char *c;
