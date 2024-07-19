@@ -2,29 +2,35 @@
 #include <stdarg.h>
 #include <stdio.h>
 
-void print_char(va_list i)
+void print_char(va_list args)
 {
-	printf("%c", va_arg(i, char));
+	printf("%c", (char)va_arg(args, int));
 }
 
-void print_integer(va_list i)
+void print_integer(va_list args)
 {
-	printf("%d", va_arg(i, int));
+	printf("%d", va_arg(args, int));
 }
-void print_float(va_list i)
+
+void print_float(va_list args)
 {
-	printf("%f", va_arg(i, float));
+	printf("%f", (float)va_arg(args, double));
 }
-void print_string(va_list i)
+
+void print_string(va_list args)
 {
-	printf("%s", va_arg(i, char *));
+	char *str = va_arg(args, char *);
+	if (str == NULL)
+	{
+		str = "(nil)";
+	}
+	printf("%s", str);
 }
 
 /**
- *
- *
+ * print_all - Imprime tout en fonction du format spécifié.
+ * @format: Liste des types d'arguments passés à la fonction.
  */
-
 void print_all(const char *const format, ...)
 {
 	va_list args;
@@ -34,13 +40,29 @@ void print_all(const char *const format, ...)
 			{"f", print_float},
 			{"s", print_string},
 			{NULL, NULL}};
-	while (format != '\0')
+
+	int i = 0, j = 0;
+	char *separator = "";
+
+	va_start(args, format);
+
+	while (format && format[j])
 	{
-		if (*(format) == vlr)
+		i = 0;
+		while (vlr[i].c != NULL)
 		{
-			return (vlr.f);
+			if (*(vlr[i].c) == format[j])
+			{
+				printf("%s", separator);
+				vlr[i].f(args);
+				separator = ", ";
+				break;
+			}
+			i++;
 		}
-		format++;
+		j++;
 	}
-	return (NULL);
+
+	printf("\n");
+	va_end(args);
 }

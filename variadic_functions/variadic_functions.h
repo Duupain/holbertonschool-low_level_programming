@@ -1,10 +1,12 @@
 #ifndef GUARD
 #define GUARD
 
+#include <stdarg.h>
+
 typedef struct spec
 {
   char *c;
-  int (*f)(va_list args);
+  void (*f)(va_list args);
 } tableau;
 
 int sum_them_all(const unsigned int n, ...);
