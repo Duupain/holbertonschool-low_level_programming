@@ -15,6 +15,7 @@ list_t *add_node(list_t **head, const char *str)
 {
 	/*allocation de memoire pour le nouveau noeud*/
 	list_t *new_node = malloc(sizeof(list_t));
+	unsigned int len = 0;
 
 	if (new_node == NULL)
 	{
@@ -29,6 +30,9 @@ list_t *add_node(list_t **head, const char *str)
 		free(new_node);
 		return (NULL);
 	}
+
+	while (str[len] != '\0')
+		len++;
 
 	new_node->len = strlen(str); /*Calculer la longueur de la chaîne*/
 
