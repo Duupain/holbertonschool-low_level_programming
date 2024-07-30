@@ -2,8 +2,8 @@
 #include <stdlib.h>
 
 /**
- * insert_dnodeint_at_index - Inserts a new node at
- * a given position in a dlistint_t list.
+ * insert_dnodeint_at_index - Inserts a new node at a given position
+ * in a dlistint_t list.
  * @h: Pointer to the pointer of the head of the list.
  * @idx: Index where the new node should be added (starts at 0).
  * @n: Integer value to store in the new node.
