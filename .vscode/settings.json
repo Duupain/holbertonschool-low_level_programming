@@ -3,6 +3,7 @@
     "stdlib.h": "c",
     "function_pointers.h": "c",
     "stdio.h": "c",
-    "lists.h": "c"
+    "lists.h": "c",
+    "string.h": "c"
   }
 }
