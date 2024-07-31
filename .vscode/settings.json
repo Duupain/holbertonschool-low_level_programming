@@ -4,6 +4,7 @@
     "function_pointers.h": "c",
     "stdio.h": "c",
     "lists.h": "c",
-    "string.h": "c"
+    "string.h": "c",
+    "main.h": "c"
   }
 }
