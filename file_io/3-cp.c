@@ -11,7 +11,10 @@
  */
 void print_error(int exit_code, const char *message, const char *filename)
 {
-	dprintf(STDERR_FILENO, "%s %s\n", message, filename);
+	if (filename[0] != '\0')
+		dprintf(STDERR_FILENO, "%s %s\n", message, filename);
+	else
+		dprintf(STDERR_FILENO, "%s\n", message);
 	exit(exit_code);
 }
 
@@ -26,10 +29,10 @@ void write_in_file(int fd_from, int fd_to, const char *filename_to)
 	ssize_t bytes_read, bytes_written;
 	char buffer[1024];
 
-	while ((bytes_read = read(fd_from, buffer, 1024)) > 0)
+	while ((bytes_read = read(fd_from, buffer, sizeof(buffer))) > 0)
 	{
 		bytes_written = write(fd_to, buffer, bytes_read);
-		if (bytes_written == -1)
+		if (bytes_written != bytes_read)
 			print_error(99, "Error: Can't write to", filename_to);
 	}
 
@@ -55,6 +58,7 @@ int main(int argc, char *argv[])
 	if (fd_from == -1)
 		print_error(98, "Error: Can't read from file", argv[1]);
 
+	// Open the file for writing with the correct permissions
 	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
 	if (fd_to == -1)
 	{
