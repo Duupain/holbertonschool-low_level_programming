@@ -8,15 +8,49 @@
  * @exit_code: Code de sortie à utiliser.
  * @message: Message d'erreur à afficher.
  * @filename: Nom du fichier lié à l'erreur.
- *
- * Description: Affiche un message d'erreur formaté sur stderr, suivi du nom
- * du fichier concerné. Ensuite, quitte le programme avec le code de sortie
- * spécifié.
  */
 void handle_error(int exit_code, const char *message, const char *filename)
 {
-  dprintf(STDERR_FILENO, "%s %s\n", message, filename);
-  exit(exit_code);
+	dprintf(STDERR_FILENO, "%s %s\n", message, filename);
+	exit(exit_code);
+}
+
+/**
+ * close_file - Ferme un descripteur de fichier et gère les erreurs.
+ * @fd: Descripteur de fichier à fermer.
+ * @filename: Nom du fichier lié au descripteur.
+ */
+void close_file(int fd, const char *filename)
+{
+	if (close(fd) == -1)
+		handle_error(100, "Error: Can't close fd", filename);
+}
+
+/**
+ * copy - Copie le contenu d'un fichier à un autre.
+ * @fd_from: Descripteur de fichier source.
+ * @fd_to: Descripteur de fichier destination.
+ * @file_from: Nom du fichier source.
+ * @file_to: Nom du fichier destination.
+ */
+void copy(int fd_from, int fd_to, const char *file_from, const char *file_to)
+{
+	ssize_t bytes_read, bytes_written;
+	char buffer[1024];
+
+	while ((bytes_read = read(fd_from, buffer, sizeof(buffer))) > 0)
+	{
+		bytes_written = write(fd_to, buffer, bytes_read);
+		if (bytes_written == -1)
+		{
+			close_file(fd_from, file_from);
+			close_file(fd_to, file_to);
+			handle_error(99, "Error: Can't write to", file_to);
+		}
+	}
+
+	if (bytes_read == -1)
+		handle_error(98, "Error: Can't read from file", file_from);
 }
 
 /**
@@ -24,70 +58,33 @@ void handle_error(int exit_code, const char *message, const char *filename)
  * @argc: Nombre d'arguments passés au programme.
  * @argv: Tableau d'arguments passés au programme.
  *
- * Description: Le programme copie le contenu de `file_from` vers `file_to`.
- * Si `file_to` existe, il est tronqué avant l'écriture. Si des erreurs se
- * produisent lors de l'ouverture, la lecture, l'écriture ou la fermeture des
- * fichiers, le programme affiche un message d'erreur approprié et quitte avec
- * un code d'erreur spécifique.
- *
- * Return: 0 en cas de succès, ou un code d'erreur spécifique en cas d'échec.
+ * Return: 0 en cas de succès, ou un code d'erreur en cas d'échec
  */
 int main(int argc, char *argv[])
 {
-  int fd_from, fd_to;
-  ssize_t bytes_read, bytes_written;
-  char buffer[1024]; /* Taille du buffer fixée à 1024 octets */
+	int fd_from, fd_to;
 
-  /* Vérifie si le nombre d'arguments est correct */
-  if (argc != 3)
-  {
-    dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-    exit(97);
-  }
+	if (argc != 3)
+	{
+		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
+		exit(97);
+	}
 
-  /* Ouvre le fichier source en lecture seule */
-  fd_from = open(argv[1], O_RDONLY);
-  if (fd_from == -1)
-  {
-    handle_error(98, "Error: Can't read from file", argv[1]);
-  }
+	fd_from = open(argv[1], O_RDONLY);
+	if (fd_from == -1)
+		handle_error(98, "Error: Can't read from file", argv[1]);
 
-  /* Ouvre ou crée le fichier de destination en écriture avec les permissions rw-rw-r-- */
-  fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
-  if (fd_to == -1)
-  {
-    close(fd_from);
-    handle_error(99, "Error: Can't write to", argv[2]);
-  }
+	fd_to = open(argv[2], O_WRONLY | O_CREAT | O_TRUNC, 0664);
+	if (fd_to == -1)
+	{
+		close_file(fd_from, argv[1]);
+		handle_error(99, "Error: Can't write to", argv[2]);
+	}
 
-  /* Lit le contenu du fichier source et l'écrit dans le fichier de destination */
-  while ((bytes_read = read(fd_from, buffer, 1024)) > 0)
-  {
-    bytes_written = write(fd_to, buffer, bytes_read);
-    if (bytes_written == -1)
-    {
-      close(fd_from);
-      close(fd_to);
-      handle_error(99, "Error: Can't write to", argv[2]);
-    }
-  }
+	copy_content(fd_from, fd_to, argv[1], argv[2]);
 
-  /* Si une erreur de lecture s'est produite */
-  if (bytes_read == -1)
-  {
-    handle_error(98, "Error: Can't read from file", argv[1]);
-  }
+	close_file(fd_from, argv[1]);
+	close_file(fd_to, argv[2]);
 
-  /* Ferme les descripteurs de fichiers */
-  if (close(fd_from) == -1)
-  {
-    handle_error(100, "Error: Can't close fd", argv[1]);
-  }
-
-  if (close(fd_to) == -1)
-  {
-    handle_error(100, "Error: Can't close fd", argv[2]);
-  }
-
-  return (0);
+	return (0);
 }
